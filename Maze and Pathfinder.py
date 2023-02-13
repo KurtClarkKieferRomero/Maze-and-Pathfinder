@@ -55,25 +55,30 @@ class Cell:
             neighbors.append(left)
         return choice(neighbors) if neighbors else False
 
-    def remove_walls(current, next):
-        dx = current.x - next.x
-        if dx == 1:
-            current.walls['left'] = False
-            next.walls['right'] = False
-        elif dx == -1:
-            current.walls['right'] = False
-            next.walls['left'] = False
-        dy = current.y - next.y
-        if dy == 1:
-            current.walls['top'] = False
-            next.walls['bottom'] = False
-        elif dy == -1:
-            current.walls['bottom'] = False
-            next.walls['top'] = False
+
+
 
 grid_cells = [Cell(col, row) for row in range(rows) for col in range(cols)]
 current_cell = grid_cells[0]
 stack = []
+
+
+def remove_walls(current_cell, next_cell):
+    dx = current.x - next.x
+    if dx == 1:
+        current.walls['left'] = False
+        next.walls['right'] = False
+    elif dx == -1:
+        current.walls['right'] = False
+        next.walls['left'] = False
+    dy = current.y - next.y
+    if dy == 1:
+        current.walls['top'] = False
+        next.walls['bottom'] = False
+    elif dy == -1:
+        current.walls['bottom'] = False
+        next.walls['top'] = False
+
 
 while True:
     sc.fill(pygame.Color('darkslategray'))
@@ -89,6 +94,7 @@ while True:
     next_cell = current_cell.check_neighbors()
     if next_cell:
         next_cell.visited = True
+        remove_walls(current_cell, next_cell)
         current_cell = next_cell
     pygame.display.flip()
     clock.tick(30)
