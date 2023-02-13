@@ -17,7 +17,7 @@ class Cell:
 
     def draw_current_cell(self):
         x, y = self.x * TILE, self.y * TILE
-        pygame.draw.rect(sc, pygame.Color('saddlebrown'), (x + 2, y + 2, TILE + 2, TILE + 2))
+        pygame.draw.rect(sc, pygame.Color('saddlebrown'), (x + 2, y + 2, TILE - 2, TILE - 2))
 
     def draw(self):
         x, y = self.x * TILE, self.y * TILE
@@ -33,6 +33,13 @@ class Cell:
         if self.walls['left']:
             pygame.draw.line(sc, pygame.Color('darkorange'), (x, y + TILE), (x, y), 2)
 
+    def check_cell(self, x, y):
+        find_index = lambda x, y: x + y * cols
+        if x < 0 or x > cols - 1 or y < 0 or y > rows -1:
+            return False
+        return grid_cells[find_index(x, y)]
+
+
 grid_cells = [Cell(col, row) for row in range(rows) for col in range(cols)]
 current_cell = grid_cells[0]
 stack = []
@@ -45,6 +52,8 @@ while True:
             exit();
 
     [cell.draw() for cell in grid_cells]
+    current_cell.visited = True
+    current_cell.draw_current_cell()
 
     pygame.display.flip()
     clock.tick(30)
