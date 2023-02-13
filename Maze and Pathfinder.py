@@ -9,6 +9,13 @@ pygame.init()
 sc = pygame.display.set_mode(RES)
 clock = pygame.time.Clock()
 
+class Cell:
+    def __init__(self, x, y):
+        self.x, self.y = x,y
+        self.walls = {'top': True, 'right': True, 'bottom': True, 'left': True}
+        self.visited = False
+
+
 while True:
     sc.fill(pygame.Color('darkslategray'))
 
