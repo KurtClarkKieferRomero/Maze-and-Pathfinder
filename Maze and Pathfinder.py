@@ -63,7 +63,7 @@ current_cell = grid_cells[0]
 stack = []
 
 
-def remove_walls(current_cell, next_cell):
+def remove_walls(current, next):
     dx = current.x - next.x
     if dx == 1:
         current.walls['left'] = False
@@ -94,7 +94,10 @@ while True:
     next_cell = current_cell.check_neighbors()
     if next_cell:
         next_cell.visited = True
+        stack.append(current_cell)
         remove_walls(current_cell, next_cell)
         current_cell = next_cell
+    elif stack:
+        current_cell = stack.pop()
     pygame.display.flip()
     clock.tick(30)
