@@ -15,6 +15,20 @@ class Cell:
         self.walls = {'top': True, 'right': True, 'bottom': True, 'left': True}
         self.visited = False
 
+    def draw(self):
+        x, y = self.x * TILE, self.y * TILE
+        if self.visited:
+            pygame.draw.rect(sc, pygame.Color('black'), (x, y, TILE, TILE))
+
+        if self.walls['top']:
+            pygame.draw.line(sc, pygame.Color('darkorange'), (x, y), (x + TILE, y), 2)
+        if self.walls['right']:
+            pygame.draw.line(sc, pygame.Color('darkorange'), (x + TILE, y), (x + TILE, y + TILE), 2)
+        if self.walls['bottom']:
+            pygame.draw.line(sc, pygame.Color('darkorange'), (x + TILE, y + TILE), (x, y + TILE), 2)
+        if self.walls['left']:
+            pygame.draw.line(sc, pygame.Color('darkorange'), (x, y + TILE), (x, y), 2)
+
 
 while True:
     sc.fill(pygame.Color('darkslategray'))
