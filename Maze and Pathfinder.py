@@ -15,6 +15,10 @@ class Cell:
         self.walls = {'top': True, 'right': True, 'bottom': True, 'left': True}
         self.visited = False
 
+    def draw_current_cell(self):
+        x, y = self.x * TILE, self.y * TILE
+        pygame.draw.rect(sc, pygame.Color('saddlebrown'), (x + 2, y + 2, TILE + 2, TILE + 2))
+
     def draw(self):
         x, y = self.x * TILE, self.y * TILE
         if self.visited:
@@ -29,6 +33,9 @@ class Cell:
         if self.walls['left']:
             pygame.draw.line(sc, pygame.Color('darkorange'), (x, y + TILE), (x, y), 2)
 
+grid_cells = [Cell(col, row) for row in range(rows) for col in range(cols)]
+current_cell = grid_cells[0]
+stack = []
 
 while True:
     sc.fill(pygame.Color('darkslategray'))
@@ -36,6 +43,8 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit();
+
+    [cell.draw() for cell in grid_cells]
 
     pygame.display.flip()
     clock.tick(30)
