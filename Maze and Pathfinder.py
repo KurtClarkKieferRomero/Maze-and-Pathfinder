@@ -70,5 +70,9 @@ while True:
     current_cell.visited = True
     current_cell.draw_current_cell()
 
+    next_cell = current_cell.check_neighbors()
+    if next_cell:
+        next_cell.visited = True
+        current_cell = next_cell
     pygame.display.flip()
     clock.tick(30)
