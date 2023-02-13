@@ -1,3 +1,6 @@
 import pygame
+from random import choice
 
-print("First commit")
+RES = WIDTH, HEIGHT, = 1202, 902
+TILE = 100
+cols, rows = WIDTH // TILE, HEIGHT // TILE
