@@ -55,6 +55,22 @@ class Cell:
             neighbors.append(left)
         return choice(neighbors) if neighbors else False
 
+    def remove_walls(current, next):
+        dx = current.x - next.x
+        if dx == 1:
+            current.walls['left'] = False
+            next.walls['right'] = False
+        elif dx == -1:
+            current.walls['right'] = False
+            next.walls['left'] = False
+        dy = current.y - next.y
+        if dy == 1:
+            current.walls['top'] = False
+            next.walls['bottom'] = False
+        elif dy == -1:
+            current.walls['bottom'] = False
+            next.walls['top'] = False
+
 grid_cells = [Cell(col, row) for row in range(rows) for col in range(cols)]
 current_cell = grid_cells[0]
 stack = []
