@@ -33,7 +33,8 @@ while True:
     # draw grid
     [[pg.draw.rect(sc, pg.Color('darkorange'), get_rect(x, y), border_radius=TILE // 5) for x, col in enumerate(row)
       if col] for y, row in enumerate(grid)]
-
+    [pg.draw.rect(sc, pg.Color('forestgreen'), get_rect(x, y)) for x, y in visited]
+    [pg.draw.rect(sc, pg.Color('darkslategray'), get_rect(x, y)) for x, y in queue]
     [exit() for event in pg.event.get() if event.type == pg.QUIT]
     pg.display.flip()
     clock.tick(10)
