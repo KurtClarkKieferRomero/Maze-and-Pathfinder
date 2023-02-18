@@ -23,6 +23,10 @@ for y, row in enumerate(grid):
     for x, col in enumerate(row):
         if not col:
             graph[(x, y)] = graph.get((x, y), []) + get_next_nodes(x, y)
+start = (0, 0)
+queue = deque([start])
+visited = {start: None}
+cur_node = start
 
 while True:
     sc.fill(pg.Color('black'))
