@@ -52,6 +52,13 @@ while True:
             if next_node not in visited:
                 queue.append(next_node)
                 visited[next_node] = cur_node
+    # draw path
+    path_head, path_segment = cur_node, cur_node
+    while path_segment:
+        pg.draw.rect(sc, pg.Color('white'), get_rect(*path_segment), TILE, border_radius=TILE // 3)
+        path_segment = visited[path_segment]
+    pg.draw.rect(sc, pg.Color('blue'), get_rect(*start), border_radius=TILE // 3)
+    pg.draw.rect(sc, pg.Color('magenta'), get_rect(*path_head), border_radius=TILE // 3)
     # pygame necessary lines
     [exit() for event in pg.event.get() if event.type == pg.QUIT]
     pg.display.flip()
